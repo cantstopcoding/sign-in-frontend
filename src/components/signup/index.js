@@ -7,7 +7,21 @@ const SignUpForm = () => {
   const signUp = (event) => {
     event.preventDefault();
     // contact API to signup
-    fetch("");
+    fetch("http://localhost:3000/api/v1/signup", {
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      method: "POST",
+      body: JSON.stringify({
+        user: {
+          name: userInfo.name,
+          username: userInfo.username,
+          email: userInfo.email,
+          password: userInfo.password,
+        },
+      }),
+    });
   };
 
   const handleInputChange = (event) => {
@@ -25,7 +39,16 @@ const SignUpForm = () => {
     <FormStyle>
       <form onSubmit={signUp}>
         <h1>Sing Up:</h1>
-        <label htmlFor="username">Username</label>
+        <label htmlFor="name">Name:</label>
+        <br />
+        <input
+          type="text"
+          name="name"
+          placeholder="name"
+          onChange={handleInputChange}
+        />
+        <br />
+        <label htmlFor="username">Username:</label>
         <br />
         <input
           type="text"
@@ -34,7 +57,7 @@ const SignUpForm = () => {
           onChange={handleInputChange}
         />
         <br />
-        <label htmlFor="email">Email</label>
+        <label htmlFor="email">Email:</label>
         <br />
         <input
           type="email"
