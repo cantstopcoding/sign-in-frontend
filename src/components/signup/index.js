@@ -21,7 +21,11 @@ const SignUpForm = () => {
           password: userInfo.password,
         },
       }),
-    });
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((token) => console.log(token.token, "token"));
   };
 
   const handleInputChange = (event) => {
