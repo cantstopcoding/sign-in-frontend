@@ -25,7 +25,20 @@ const SignUpForm = () => {
       .then((response) => {
         return response.json();
       })
-      .then((token) => console.log(token.token, "token"));
+      .then((data) => {
+        console.log(data.token, "here!!!");
+        const token = data.token;
+
+        return fetch("http://localhost:3000/api/v1/books", {
+          method: "GET",
+          headers: {
+            Authorization: token,
+          },
+        });
+      })
+      .then((response) => response.json())
+      .then((data) => console.log(data, "yoo!!!!"))
+      .then((err) => console.log(err));
   };
 
   const handleInputChange = (event) => {
