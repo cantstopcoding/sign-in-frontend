@@ -3,6 +3,7 @@ import { FormStyle } from "./styles";
 
 const SignUpForm = () => {
   const [userInfo, setUserInfo] = useState({});
+  const [error, setError] = useState(null);
 
   const signUp = (event) => {
     event.preventDefault();
@@ -36,10 +37,15 @@ const SignUpForm = () => {
           },
         });
       })
-      .then((response) => response.json())
+      .then((response) => {
+        response.json();
+      })
       .then((data) => console.log(data, "yoo!!!!"))
       .then((err) => console.log(err));
   };
+
+  // I need to display the data on the page
+  // how?
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;

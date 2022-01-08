@@ -1,31 +1,36 @@
 import "./App.css";
-import React, { useEffect, useState } from "react";
-import SignUpForm from "./components/signup";
-import Dump from "./components/dump";
+import React from "react";
+import TokenContext from "./components/TokenContext";
+import UsersContainer from "./containers/UsersContainer";
+
+// creates a piece of global state
+// const TokenContext = React.createContext();
 
 const App = () => {
-  const [books, setBooks] = useState([]);
-
-  useEffect(() => {
-    fetch("http://localhost:3000/api/v1/books")
-      .then((response) => response.json())
-      .then((data) => {
-        setBooks(data);
-        console.log(data, "tututu");
-        return data;
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
+  const token = "";
 
   return (
     <div className="App">
-      <SignUpForm />
-      {/* if books.message.token exists then return books, else return error  */}
-      <Dump sendDown={books} />
+      <TokenContext.Provider value={token}>
+        <UsersContainer />
+      </TokenContext.Provider>
     </div>
   );
 };
 
 export default App;
+
+// const ThemeContext = React.createContext('light');
+
+// class App extends React.Component {
+//   render() {
+//     // Use a Provider to pass the current theme to the tree below.
+//     // Any component can read it, no matter how deep it is.
+//     // In this example, we're passing "dark" as the current value.
+//     return (
+//       <ThemeContext.Provider value="dark">
+//         <Toolbar />
+//       </ThemeContext.Provider>
+//     );
+//   }
+// }
